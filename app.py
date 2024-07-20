@@ -292,6 +292,5 @@ if __name__ == "__main__":
     
     ubiquipy = UbiquiPy()
     ubiquipy.main()
-    #sites = ubiquipy.network_admin(hostname='ubntdemo.netifidash.io', port='8443', username='ubnt_mon', password='!RyuGin45!@')
     
     
