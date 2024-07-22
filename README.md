@@ -14,7 +14,7 @@
 ### Pull from the experiment Branch ###
 
 * git branch -a
-* git checkout experiement
+* git checkout experiment
 * git pull origin experiment
 
 
