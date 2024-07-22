@@ -31,7 +31,7 @@
 * Further improvements on data parsing from returned JSON
 
 #### Upcoming Features ####
-* Protect & Access modules
+* Protect & Access API modules
 * docker image 
 * .EXE, .deb, .dmg executables
 
