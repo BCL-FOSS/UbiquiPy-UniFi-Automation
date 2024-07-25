@@ -262,7 +262,7 @@ class UbiquiPy:
                         pass
                     case 3:
                         selected_value = menu_items[selection]  # Gets the function name
-                        selected_value(email_pass='qaxj lylk bpun rwrz', email_recipients=['derekb@baughcl.com'], email_sender='bcladmin@baughcl.com', body='This is the body of the text message', subject='Site Report', filename='bcl_unifi_sites_report.pdf')  # add parentheses to call the function
+                        selected_value(email_pass='', email_recipients=[''], email_sender='', body='This is the body of the text message', subject='Site Report', filename='bcl_unifi_sites_report.pdf')  # add parentheses to call the function
                     case 4:
                         selected_value = menu_items[selection]  # Gets the function name
                         selected_value()  # add parentheses to call the function
