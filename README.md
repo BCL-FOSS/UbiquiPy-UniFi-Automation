@@ -21,6 +21,7 @@
 * All UDM Pro & Controller Endpoints (Network)
 * All Site Endpoints (Network)
 * All Callable commands (Network)
+* Automatic SSL/TLS *will not function without SSL for security purposes
 
 #### Current Features Under Development ####
 
