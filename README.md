@@ -1,30 +1,24 @@
-# UbiquiPy: UniFi Automation Framework & CLI Management Tool #
+# UbiquiPy: UniFi Automation Framework #
 [Click here to learn more](https://www.baughcl.com/ubiquipy.html)
 
-## Allows for simple administration on the command line. The net_admin option holds all UniFi Network features, the other options are under development.
+## Python wrapper for the UniFi API centered around automation. ##
 
-## UniFiNetAPI.py can be utilized as a module in your scripts for easy UniFi Network automation, pip installation will be implemented soon.
+## UniFiNetAPI.py can be utilized as a module in your scripts, will be upload to PyPi as a library soon for pip install ##
 
-### Environment Initialization ###
+### Test Library Functions with with CLI App ###
+#### The net_admin option holds all UniFi Network features, other options are under development. ####
 
-* git clone https://github.com/BCL-FOSS/UbiquiPy-UniFi-Automation.git
+* git clone
 * cd ubiquipy/
-* apt install python3.10-venv (if on Ubuntu)
+* apt install python3.12-venv
 * python3 -m venv .venv 
 * . .venv/bin/activate
 * pip install requests ipython fpdf2
 * python3 app.py
 
-
-### Pull from the experiment Branch ###
-
-* git branch -a
-* git checkout experiment
-* git pull origin experiment
-
 #### Current Implemented Features ####
 
-* All UDM Pro & Controller Endpoints
+* All UDM Pro & Controller Endpoints (Network)
 * All Site Endpoints (Network)
 * All Callable commands (Network)
 
