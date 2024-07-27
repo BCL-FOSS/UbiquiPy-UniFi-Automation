@@ -32,7 +32,7 @@
 #### Upcoming Features ####
 * Protect & Access API modules
 * docker image 
-* .EXE, .deb, .dmg executables
+* .EXE, .deb, .dmg executables for cli tool
 
 
 

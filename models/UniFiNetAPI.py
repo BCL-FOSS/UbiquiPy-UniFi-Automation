@@ -17,7 +17,7 @@ class UniFiNetAPI:
         self.is_udm = is_udm
         self.auth_check = False
 
-    def input_validation(inputs=[]):
+    def input_validation(self, inputs=[]):
         for input in inputs:
             if str(input).strip() == '':
                 return 0
@@ -1320,12 +1320,7 @@ class UniFiNetAPI:
             #Clean up
             response.close()
 
-    def mgr_sites(self, name='', desc='', mac='', site_id='', cmd=''):
-
-        input_validation = self.input_validation([site_id, mac, cmd, name, desc])
-
-        if input_validation == 0:
-            return error_codes[0]
+    def mgr_sites(self, **kwargs):
 
         if self.is_udm is True:
 
@@ -1339,32 +1334,55 @@ class UniFiNetAPI:
 
         try:
 
-            match cmd.strip():
+            match str(kwargs.get('cmd')).strip():
                 case 'g':
                     payload = {'cmd': 'get-admins'}
 
                 case 'a':
-                    payload = {'cmd': 'add-site',
-                                        'name': name,
-                                        'desc': desc}
+                    input_validation = self.input_validation([str(kwargs.get('name')), str(kwargs.get('desc'))])
+
+                    if input_validation == 0:
+                        return error_codes[0]
+                    else:
+                        payload = {'cmd': 'add-site', 'name': str(kwargs.get('name')), 'desc': str(kwargs.get('desc'))}
                 
                 case 'u':
-                    payload = {'cmd': 'update-site',
-                                      'name': name,
-                                      'desc': desc}
+                    input_validation = self.input_validation([str(kwargs.get('name')), str(kwargs.get('desc'))])
+
+                    if input_validation == 0:
+                        return error_codes[0]
+                    else:
+                        payload = {'cmd': 'update-site',
+                                      'name': kwargs.get('name'),
+                                      'desc': kwargs.get('desc')}
                     
                 case 'r':
-                    payload = {'cmd': 'delete-site',
-                                      'name': name}
+                    input_validation = self.input_validation([str(kwargs.get('desc'))])
+
+                    if input_validation == 0:
+                        return error_codes[0]
+                    else:
+                        payload = {'cmd': 'delete-site',
+                                      'name': kwargs.get('name')}
                     
                 case 'm':
-                    payload = {'cmd': 'move-device',
-                                      'mac': mac,
-                                      'site_id': site_id}
+                    input_validation = self.input_validation([str(kwargs.get('site_id')), str(kwargs.get('mac'))])
+
+                    if input_validation == 0:
+                        return error_codes[0]
+                    else:
+                        payload = {'cmd': 'move-device',
+                                      'mac': str(kwargs.get('mac')),
+                                      'site_id': str(kwargs.get('site_id'))}
                     
                 case 'd':
-                    payload = {'cmd': 'delete-device',
-                                      'mac': mac}
+                    input_validation = self.input_validation([str(kwargs.get('mac'))])
+
+                    if input_validation == 0:
+                        return error_codes[0]
+                    else:
+                        payload = {'cmd': 'delete-device',
+                                      'mac': str(kwargs.get('mac'))}
                     
                 case _:
                     return error_codes[1]
