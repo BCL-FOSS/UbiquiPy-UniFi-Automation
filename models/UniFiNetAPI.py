@@ -10,6 +10,7 @@ class UniFiNetAPI:
     def __init__(self, is_udm=False, **kwargs):
         self.base_url = f"https://{kwargs.get('controller_ip')}:{kwargs.get('controller_port')}"
         self.url = kwargs.get('controller_ip')
+        self.inform_url = f"https://{kwargs.get('controller_ip')}:8080/inform"
         self.port = kwargs.get('controller_port')
         self.username = kwargs.get('username')
         self.password = kwargs.get('password')
@@ -1404,9 +1405,9 @@ class UniFiNetAPI:
             #Clean up
             response.close()
 
-    def mgr_clients(self, mac='',site='', cmd=''):
+    def mgr_clients(self, **kwargs):
 
-        input_validation = self.input_validation([site, mac, cmd])
+        input_validation = self.input_validation([str(kwargs.get('mac'))])
 
         if input_validation == 0:
             return error_codes[0]
@@ -1423,26 +1424,26 @@ class UniFiNetAPI:
 
         try:
             
-            match cmd:
+            match str(kwargs.get('cmd')).strip():
                 case 'b':
-                    payload = {'cmd': 'block-sta',
-                                      'mac': mac}
+                        payload = {'cmd': 'block-sta',
+                                      'mac': kwargs.get('mac')}
                     
                 case 'k':
                     payload = {'cmd': 'kick-sta',
-                                      'mac': mac}
+                                      'mac': kwargs.get('mac')}
                     
                 case 'u':
                     payload = {'cmd': 'unblock-sta',
-                                      'mac': mac}
+                                      'mac': kwargs.get('mac')}
                     
                 case 'f':
                     payload = {'cmd': 'forget-sta',
-                                      'mac': mac}
+                                      'mac': kwargs.get('mac')}
                     
                 case 'r':
                     payload = {'cmd': 'unauthorize-guest',
-                                      'mac': mac}
+                                      'mac': kwargs.get('mac')}
                     
                 case _:
                     return error_codes[1]
@@ -1462,9 +1463,9 @@ class UniFiNetAPI:
             #Clean up
             response.close()
 
-    def mgr_devices(self, cmd='', mac='', port_idx='', url='', inform_url=''):
+    def mgr_devices(self, **kwargs):
 
-        input_validation = self.input_validation([port_idx, url, inform_url, mac, cmd])
+        input_validation = self.input_validation([kwargs.get('mac')])
 
         if input_validation == 0:
             return error_codes[0]
@@ -1481,61 +1482,72 @@ class UniFiNetAPI:
 
         try:
             
-            match cmd:
+            match str(kwargs.get('cmd')).strip():
                 case 'a':
                     payload = {'cmd': 'adopt',
-                                      'mac': mac}
+                                      'mac': kwargs.get('mac')}
                     
                 case 'r':
                     payload = {'cmd': 'restart',
-                                      'mac': mac}
+                                      'mac': kwargs.get('mac')}
                     
                 case 'f':
                     payload = {'cmd': 'force-provision',
-                                      'mac': mac}
+                                      'mac': kwargs.get('mac')}
                     
                 case 'p':
-                    payload = {'cmd': 'power-cycle',
-                                      'mac': mac,
-                                      'port_idx': port_idx}
+                    input_validation = self.input_validation([kwargs.get('port_idx')])
+
+                    if input_validation == 0:
+                        return error_codes[0]
+                    else:
+                        payload = {'cmd': 'power-cycle',
+                                      'mac': kwargs.get('mac'),
+                                      'port_idx': kwargs.get('port_idx')}
                     
                 case 's':
                     payload = {'cmd': 'speedtest',
-                                      'mac': mac}
+                                      'mac': kwargs.get('mac')}
                 case 'S':
                     payload = {'cmd': 'speedtest-status',
-                                      'mac': mac}
+                                      'mac': kwargs.get('mac')}
                 case 'l':
                     payload = {'cmd': 'set-locate',
-                                      'mac': mac}
+                                      'mac': kwargs.get('mac')}
                 case 'L':
                     payload = {'cmd': 'unset-locate',
-                                      'mac': mac}
+                                      'mac': kwargs.get('mac')}
                 case 'u':
                     payload = {'cmd': 'upgrade',
-                                      'mac': mac}
+                                      'mac': kwargs.get('mac')}
                 case 'U':
-                    if url.strip() == '':
-                        print('Enter the URL for the firmware to update to.')
+                    input_validation = self.input_validation([kwargs.get('url')])
+
+                    if input_validation == 0:
+                        return error_codes[0]
                     else:
-                        print('Updating...')
-                        payload = {'cmd': 'upgrade-external',
-                                        'mac': mac,
-                                        'url': url}
+                        if url.strip() == '':
+                            print('Enter the URL for the firmware to update to.')
+                        else:
+                            print('Updating...')
+                            payload = {'cmd': 'upgrade-external',
+                                        'mac': kwargs.get('mac'),
+                                        'url': kwargs.get('url')}
                 case 'm':
-                    if inform_url.strip() == '':
-                        print('Enter the new inform URL to migrate the device: %s to.' % mac)
+
+                    if self.inform_url.strip() == '':
+                        print('Enter the new inform URL to migrate the device: %s to.' % kwargs.get('mac'))
                     else:
                         ('Migrating...')
                         payload = {'cmd': 'migrate',
-                                        'mac': mac,
-                                        'inform_url': inform_url}
+                                        'mac': kwargs.get('mac'),
+                                        'inform_url': self.inform_url}
                 case 'M':
                     payload = {'cmd': 'cancel-migrate',
-                                      'mac': mac}
+                                      'mac': kwargs.get('mac')}
                 case 'w':
                     payload = {'cmd': 'spectrum-scan',
-                                      'mac': mac}
+                                      'mac': kwargs.get('mac')}
                     
                 case _:
                     return error_codes[1]

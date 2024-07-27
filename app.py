@@ -73,7 +73,7 @@ class UbiquiPy:
     def main(self):
          # Create a menu dictionary where the key is an integer number and the
         # value is a function name.
-        functions_names = [self.network_admin, self.generate_pdf, self.email, self.done]
+        functions_names = [self.network_admin, self.done]
         menu_items = dict(enumerate(functions_names, start=1))
 
         try:
@@ -225,9 +225,19 @@ class UbiquiPy:
                                                 Site Manager
         
                                     """)
+                                
+                                time.sleep(0.5)   
+
+                                name = str(input("Enter new site name: "))
+
+                                desc = str(input("Enter new site description: "))
+
+                                cmd = str(input("Enter command: "))
                             
                                 net_selected_value = net_menu_items[net_selection]  # Gets the function name
-                                data=net_selected_value()  # add parentheses to call the function
+                                data=net_selected_value(name=name, desc=desc, cmd=cmd)  # add parentheses to call the function
+
+                                system('clear')
 
                                 for cell in data:
                                     pprint.pprint(cell)
@@ -256,14 +266,6 @@ class UbiquiPy:
                         
 
                     case 2:
-                        #pprint.pprint(sites)
-                        #selected_value = menu_items[selection]  # Gets the function name
-                        #selected_value(chapters=sites, title='UniFi Controller Site(s) Report', author='Derek Baugh', output_file_name='bcl_unifi_sites_report.pdf')  # add parentheses to call the function
-                        pass
-                    case 3:
-                        selected_value = menu_items[selection]  # Gets the function name
-                        selected_value(email_pass='', email_recipients=[''], email_sender='', body='This is the body of the text message', subject='Site Report', filename='bcl_unifi_sites_report.pdf')  # add parentheses to call the function
-                    case 4:
                         selected_value = menu_items[selection]  # Gets the function name
                         selected_value()  # add parentheses to call the function
                     case _:
