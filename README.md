@@ -6,7 +6,7 @@
 ## UniFiNetAPI.py can be utilized as a module in your scripts, will be upload to PyPi as a library soon for pip install ##
 
 ### Test Library Functions with with CLI App ###
-#### The net_admin option holds all UniFi Network features, other options are under development. ####
+#### The net_admin option holds all UniFi Network features ####
 
 * git clone
 * cd ubiquipy/
@@ -21,7 +21,7 @@
 * All UDM Pro & Controller Endpoints (Network)
 * All Site Endpoints (Network)
 * All Callable commands (Network)
-* Automatic SSL/TLS *will not function without SSL for security purposes
+* Automatic SSL/TLS *Library & CLI tools will not function without valid SSL cert
 
 #### Current Features Under Development ####
 
