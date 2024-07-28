@@ -1,12 +1,11 @@
 # UbiquiPy: UniFi Automation Framework #
 [Click here to learn more](https://www.baughcl.com/ubiquipy.html)
 
-## Python wrapper for the UniFi API centered around automation. ##
+## Python library for UniFi Network API centered around automation. ##
 
-## UniFiNetAPI.py can be utilized as a module in your scripts, will be upload to PyPi as a library soon for pip install ##
+### Uploading to PyPi soon ###
 
-### Test Library Functions with with CLI App ###
-#### The net_admin option holds all UniFi Network features ####
+### Test UbqiuiPy with the CLI App ###
 
 * git clone
 * cd ubiquipy/
@@ -27,7 +26,6 @@
 
 * Implementation of all uncatagorized/experimental endpoints (Network)
 * Further improvements on data parsing from returned JSON
-* pip installation capabilities
 
 #### Upcoming Features ####
 * Protect & Access API modules

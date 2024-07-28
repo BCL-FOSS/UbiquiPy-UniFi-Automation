@@ -1,6 +1,4 @@
-from models.Utility import Utility
 from models.UniFiNetAPI import UniFiNetAPI
-from models.PDF import PDF
 import pprint
 import json
 import sys
@@ -9,36 +7,14 @@ import time
 
 class UbiquiPy:
     def __init__(self):
-        self.pdf = PDF()
-        self.util_obj = Utility()
-     
-
-    def generate_pdf(self, title='', author='',output_file_name='', chapters=[]):
-        chap_num = 0
-        
-        try:
-            self.pdf.set_title(title)
-            self.pdf.set_author(author)
-            for chapter in chapters:
-                chap_num+=1
-                self.pdf.print_chapter(chap_num, chapter['name'], json.dumps(chapter))
-            self.pdf.output(output_file_name)
-        except Exception as e:
-                print(e)
-        else:
-                print('PDF Report Creation Complete')
+        pass
                 
-
     def network_admin(self, hostname='', port='', username='', password=''):
         ubnt_controller = UniFiNetAPI(controller_ip=hostname, controller_port=port, username=username, password=password)
         status = ubnt_controller.authenticate()
         print(status)
         return ubnt_controller
     
-    
-    def email(self, email_pass='', email_recipients=[], email_sender='', body='', subject='', filename=''):
-        self.util_obj.send_email(password=email_pass, recipients=email_recipients, sender=email_sender, body=body, subject=subject, file_name=filename)
-
     def display_menu(self, menu=None, menu_type=''):
 
         match menu_type:
@@ -291,8 +267,8 @@ class UbiquiPy:
             
 
 if __name__ == "__main__":
-    
     ubiquipy = UbiquiPy()
     ubiquipy.main()
+
     
     

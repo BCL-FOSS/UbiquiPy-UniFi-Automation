@@ -2,6 +2,7 @@ import requests
 import os,os.path
 import pprint
 from os import system
+from models.util_models.Utility import Utility
 
 error_codes = [460, 472, 489]
 
@@ -17,6 +18,7 @@ class UniFiNetAPI:
         self.token = None
         self.is_udm = is_udm
         self.auth_check = False
+        self.util_obj = Utility()
 
     def input_validation(self, inputs=[]):
         for input in inputs:
@@ -67,7 +69,7 @@ class UniFiNetAPI:
             url = f"{self.base_url}/api/logout"
 
         try:
-            response = self.make_request(url=url, cmd='p')
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='p')
 
             if response.status_code == 200:
                 data = response.json()
@@ -153,10 +155,10 @@ class UniFiNetAPI:
             match cmd.strip():
                 case 'p':
                     
-                    response = self.make_request(url=url, cmd=cmd, payload=payload)
+                    response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd, payload=payload)
 
                 case 'g':
-                    response = self.make_request(url=url, cmd=cmd)
+                    response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd)
 
                 case _:
                     return error_codes[1]
@@ -209,7 +211,7 @@ class UniFiNetAPI:
             
         try:
                  
-            response = self.make_request(url=url, cmd='p', payload=payload)
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='p', payload=payload)
 
             if response.status_code == 200:
                 data = response.json()
@@ -241,7 +243,7 @@ class UniFiNetAPI:
 
         try:
 
-            response = self.make_request(url=url, cmd='g')
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
             if response.status_code == 200:
                 data = response.json()
@@ -274,7 +276,7 @@ class UniFiNetAPI:
 
         try:
 
-            response = self.make_request(url=url, cmd='g')
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
             if response.status_code == 200:
                 data = response.json()
@@ -303,7 +305,7 @@ class UniFiNetAPI:
 
         try:
 
-            response = self.make_request(url=url, cmd='g')
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
             if response.status_code == 200:
                 data = response.json()
@@ -333,7 +335,7 @@ class UniFiNetAPI:
 
         try:
 
-            response = self.make_request(url=url, cmd='g')
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
             if response.status_code == 200:
                 data = response.json()
@@ -362,7 +364,7 @@ class UniFiNetAPI:
 
         try:
 
-            response = self.make_request(url=url, cmd='g')
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
             if response.status_code == 200:
                 data = response.json()
@@ -393,7 +395,7 @@ class UniFiNetAPI:
 
         try:
 
-            response = self.make_request(url=url, cmd='g')
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
             if response.status_code == 200:
                 data = response.json()
@@ -424,7 +426,7 @@ class UniFiNetAPI:
 
         try:
 
-            response = self.make_request(url=url, cmd='p', payload=payload)
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='p', payload=payload)
 
             if response.status_code == 200:
                 data = response.json()
@@ -452,7 +454,7 @@ class UniFiNetAPI:
         payload = {'':''}
 
         try:
-            response = self.make_request(url=url, cmd='p', payload=payload)
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='p', payload=payload)
 
             if response.status_code == 200:
                 data = response.json()
@@ -477,7 +479,7 @@ class UniFiNetAPI:
 
         try:
 
-            response = self.make_request(url=url, cmd='g')
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
             if response.status_code == 200:
                 data = response.json()
@@ -512,7 +514,7 @@ class UniFiNetAPI:
 
         try:
 
-            response = self.make_request(url=url, cmd='g')
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
             if response.status_code == 200:
                 data = response.json()
@@ -549,11 +551,11 @@ class UniFiNetAPI:
 
             match cmd.strip():
                 case 'p':
-                    response = self.make_request(url=url, cmd=cmd, payload=payload) 
+                    response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd, payload=payload) 
                 case 'e':
-                    response = self.make_request(url=url, cmd=cmd, payload=payload)
+                    response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd, payload=payload)
                 case 'g':
-                    response = self.make_request(url=url, cmd=cmd, payload=payload)
+                    response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd, payload=payload)
                 case _:
                     return error_codes[1]
 
@@ -588,7 +590,7 @@ class UniFiNetAPI:
             url = f"{self.base_url}{url_string}"
 
         try:
-            response = self.make_request(url=url, cmd='g')
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
             if response.status_code == 200:
                 data = response.json()
@@ -624,9 +626,9 @@ class UniFiNetAPI:
             if self.is_udm is False and not macs: 
                 payload = {'macs': macs}
                     
-                response = self.make_request(url=url, cmd='p', payload=payload)
+                response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='p', payload=payload)
             else:
-                response = self.make_request(url=url, cmd='g')               
+                response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')               
 
             if response.status_code == 200:
                 data = response.json()
@@ -670,10 +672,10 @@ class UniFiNetAPI:
             match cmd.strip():
                 case 'e':
                     payload = {'': ''}
-                    response = self.make_request(url=url, cmd=cmd, payload=payload)     
+                    response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd, payload=payload)     
                         
                 case 'g':
-                    response = self.make_request(url=url, cmd=cmd)
+                    response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd)
                 
                 case _:
                     return error_codes[1]
@@ -709,7 +711,7 @@ class UniFiNetAPI:
 
         try:
 
-            response = self.make_request(url=url, cmd='g')
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
             if response.status_code == 200:
                 data = response.json()
@@ -745,10 +747,10 @@ class UniFiNetAPI:
             match cmd.strip():
                     case 'e':
                         payload = {'': ''}
-                        response = self.make_request(url=url, cmd=cmd, payload=payload)
+                        response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd, payload=payload)
                         
                     case 'g':
-                        response = self.make_request(url=url, cmd=cmd)
+                        response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd)
                     
                     case _:
                         return error_codes[1]
@@ -789,11 +791,11 @@ class UniFiNetAPI:
                 
                     payload = {'': ''}
 
-                    response = self.make_request(url=url, cmd=cmd, payload=payload)
+                    response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd, payload=payload)
                         
                 case 'g':
 
-                    response = self.make_request(url=url, cmd=cmd)
+                    response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd)
 
                 case _:
                     return error_codes[1]
@@ -843,7 +845,7 @@ class UniFiNetAPI:
 
                         url = f"{self.base_url}{url_string}"
 
-                        response = self.make_request(url= url, cmd=cmd, payload=payload)
+                        response = self.util_obj.make_request(ubiquipy=self, url= url, cmd=cmd, payload=payload)
 
                         
                     case 'p':
@@ -851,7 +853,7 @@ class UniFiNetAPI:
 
                         url = f"{self.base_url}{url_string}"
 
-                        response = self.make_request(url= url, cmd=cmd, payload=payload)
+                        response = self.util_obj.make_request(ubiquipy=self, url= url, cmd=cmd, payload=payload)
 
                     case 'g':
 
@@ -859,7 +861,7 @@ class UniFiNetAPI:
 
                         url = f"{self.base_url}{url_string}"
 
-                        response = self.make_request(url= url, cmd=cmd)
+                        response = self.util_obj.make_request(ubiquipy=self, url= url, cmd=cmd)
 
                     case _:
                         return error_codes[1]
@@ -874,7 +876,7 @@ class UniFiNetAPI:
 
                         url = f"{self.base_url}{url_string}"
 
-                        response = self.make_request(url= url, cmd=cmd, payload=payload)
+                        response = self.util_obj.make_request(ubiquipy=self, url= url, cmd=cmd, payload=payload)
 
                         
                     case 'p':
@@ -882,7 +884,7 @@ class UniFiNetAPI:
 
                         url = f"{self.base_url}{url_string}"
 
-                        response = self.make_request(url= url, cmd=cmd, payload=payload)
+                        response = self.util_obj.make_request(ubiquipy=self, url= url, cmd=cmd, payload=payload)
 
                     case 'g':
 
@@ -890,7 +892,7 @@ class UniFiNetAPI:
 
                         url = f"{self.base_url}{url_string}"
 
-                        response = self.make_request(url= url, cmd=cmd)
+                        response = self.util_obj.make_request(ubiquipy=self, url= url, cmd=cmd)
 
                     case _:
                         return error_codes[1]
@@ -932,11 +934,11 @@ class UniFiNetAPI:
                     
                 payload = {'within': seen_last}
 
-                response = self.make_request(url=url, cmd='p', payload=payload)
+                response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='p', payload=payload)
 
             else:
 
-                response = self.make_request(url=url, cmd='g')
+                response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
             if response.status_code == 200:
                 data = response.json()
@@ -968,7 +970,7 @@ class UniFiNetAPI:
             url = f"{self.base_url}{url_string}"
 
         try:
-            response = self.make_request(url=url, cmd='g')
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
             if response.status_code == 200:
                 data = response.json()
@@ -1005,11 +1007,11 @@ class UniFiNetAPI:
                 case 'e':
                     payload = {'': ''}
                     
-                    response = self.make_request(url=url, cmd=cmd, payload=payload)
+                    response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd, payload=payload)
                 
 
                 case 'g':
-                    response = self.make_request(url=url, cmd=cmd)
+                    response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd)
 
                 case _:
                     return error_codes[1]
@@ -1045,7 +1047,7 @@ class UniFiNetAPI:
 
         try:
 
-            response = self.make_request(url=url, cmd='g')
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
             if response.status_code == 200:
                 data = response.json()
@@ -1078,13 +1080,13 @@ class UniFiNetAPI:
 
                         url = f"{self.base_url}{url_string}"
 
-                        response = self.make_request(url=url, cmd='g', payload=payload)
+                        response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g', payload=payload)
                     case 'g':
                         url_string = "/proxy/network/api/s/%s/stat/spectrumscan/" % site
 
                         url = f"{self.base_url}{url_string}"
 
-                        response = self.make_request(url=url, cmd='g')
+                        response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
                     case _:
                         return error_codes[1]
@@ -1096,13 +1098,13 @@ class UniFiNetAPI:
 
                         url = f"{self.base_url}{url_string}"
 
-                        response = self.make_request(url=url, cmd='g', payload=payload)
+                        response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g', payload=payload)
                     case 'g':
                         url_string = "/api/s/%s/stat/spectrumscan/" % site
 
                         url = f"{self.base_url}{url_string}"
 
-                        response = self.make_request(url=url, cmd='g')
+                        response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
                     case _:
                         error_codes[1]
@@ -1142,14 +1144,14 @@ class UniFiNetAPI:
                 case 'e':
                 
                     payload = {'': ''}
-                    response = self.make_request(url=url, cmd=cmd, payload=payload)
+                    response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd, payload=payload)
                        
                 case 'p':
                     payload = {'': ''}
-                    response = self.make_request(url=url, cmd=cmd, payload=payload)
+                    response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd, payload=payload)
                        
                 case 'g':
-                    response = self.make_request(url=url, cmd=cmd)
+                    response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd)
 
                 case _:
                     return error_codes[1]
@@ -1189,15 +1191,15 @@ class UniFiNetAPI:
                     case 'e':
 
                         payload = {'': ''}
-                        response = self.make_request(url=url, cmd=cmd, payload=payload)
+                        response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd, payload=payload)
                 
                     case 'p':
                         payload = {'': ''}
-                        response = self.make_request(url=url, cmd=cmd, payload=payload)
+                        response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd, payload=payload)
                         
                     case 'g':
                         
-                        response = self.make_request(url=url, cmd=cmd)
+                        response = self.util_obj.make_request(ubiquipy=self, url=url, cmd=cmd)
 
                     case _:
                         return error_codes[1]
@@ -1233,7 +1235,7 @@ class UniFiNetAPI:
 
         try:
 
-           response = self.make_request(url=url, cmd='g')
+           response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='g')
 
            if response.status_code == 200:
                 data = response.json()
@@ -1267,11 +1269,11 @@ class UniFiNetAPI:
         try:
             if not macs:
                 payload = {'macs': macs}
-                response = self.make_request(url=url, cmd='p', payload=payload)
+                response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='p', payload=payload)
 
             else:
 
-                response = self.make_request(url=url, cmd='p')
+                response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='p')
 
             if response.status_code == 200:
                 data = response.json()
@@ -1307,7 +1309,7 @@ class UniFiNetAPI:
 
             payload = {'start': start, 'end': end}
 
-            response = self.make_request(url=url, cmd='p', payload=payload)
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='p', payload=payload)
 
             if response.status_code == 200:
                 data = response.json()
@@ -1388,7 +1390,7 @@ class UniFiNetAPI:
                 case _:
                     return error_codes[1]
 
-            response = self.make_request(url=url, cmd='p', payload=payload)
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='p', payload=payload)
 
             if response.status_code == 200:
                 data = response.json()
@@ -1449,7 +1451,7 @@ class UniFiNetAPI:
                     return error_codes[1]
                 
             
-            response = self.make_request(url=url, cmd='p', payload=payload)
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='p', payload=payload)
 
             if response.status_code == 200:
                 data = response.json()
@@ -1552,7 +1554,7 @@ class UniFiNetAPI:
                 case _:
                     return error_codes[1]
            
-            response = self.make_request(url=url, cmd='p', payload=payload)
+            response = self.util_obj.make_request(ubiquipy=self, url=url, cmd='p', payload=payload)
 
             if response.status_code == 200:
                 data = response.json()

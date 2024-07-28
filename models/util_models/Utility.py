@@ -37,18 +37,14 @@ class Utility:
             server.login(sender, password)
             server.sendmail(sender, recipients, message.as_string())
 
-    def input_validation(inputs=[]):
-        for input in inputs:
-            if str(input).strip() == '':
-                return 0
 
-    def make_request(self, ubiquipy=None, url='', cmd='', payload={'':''}, auth_check=False):
+    def make_request(self, ubiquipy=None, url='', cmd='', payload={'':''}):
 
-        if payload and auth_check == False:
+        if payload and ubiquipy.auth_check == False:
             print('Empty payload')
             headers={'':''}
 
-        elif not payload and auth_check == True:
+        elif not payload and ubiquipy.auth_check == True:
             headers={
                         'Content-Type':'application/json',
                         'Cookie':ubiquipy.token
