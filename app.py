@@ -1,4 +1,6 @@
 from models.UniFiNetAPI import UniFiNetAPI
+from models.util_models.PDF import PDF
+from models.util_models.Utility import Utility
 import pprint
 import json
 import sys
@@ -7,8 +9,28 @@ import time
 
 class UbiquiPy:
     def __init__(self):
-        pass
+        self.pdf = PDF()
+        self.util_obj = Utility()
+        
+
+    def generate_pdf(self, title='', author='',output_file_name='', chapters=[]):
+        chap_num = 0
+        
+        try:
+            self.pdf.set_title(title)
+            self.pdf.set_author(author)
+            for chapter in chapters:
+                chap_num+=1
+                self.pdf.print_chapter(chap_num, chapter['name'], json.dumps(chapter))
+            self.pdf.output(output_file_name)
+        except Exception as e:
+                print(e)
+        else:
+                print('PDF Report Creation Complete')
                 
+    def email(self, email_pass='', email_recipients=[], email_sender='', body='', subject='', filename=''):
+        self.util_obj.send_email(password=email_pass, recipients=email_recipients, sender=email_sender, body=body, subject=subject, file_name=filename)
+
     def network_admin(self, hostname='', port='', username='', password=''):
         ubnt_controller = UniFiNetAPI(controller_ip=hostname, controller_port=port, username=username, password=password)
         status = ubnt_controller.authenticate()

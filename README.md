@@ -1,11 +1,12 @@
-# UbiquiPy: UniFi Automation Framework #
+# UbiquiPy: UniFi Automation Framework & CLI Management Tool #
 [Click here to learn more](https://www.baughcl.com/ubiquipy.html)
 
-## Python library for UniFi Network API centered around automation. ##
+## Python wrapper Library for Ubiquiti UniFi API ##
 
-### Uploading to PyPi soon ###
+## UniFiNetAPI.py can be utilized as a module in your scripts, will be upload to PyPi as a library soon for pip install ##
 
-### Test UbqiuiPy with the CLI App ###
+### Test Library with CLI App. This is a very rough CLI tool showcasing 5 API endpoints. ###
+### For full functionality, add UniFiNetAPI.py & models->util_models-PDF.py/Utility.py to your project. ###
 
 * git clone
 * cd ubiquipy/
@@ -17,20 +18,26 @@
 
 #### Current Implemented Features ####
 
-* All UDM Pro & Controller Endpoints (Network)
+* All UDM Pro & Controller Endpoints
 * All Site Endpoints (Network)
 * All Callable commands (Network)
-* Automatic SSL/TLS *Library & CLI tools will not function without valid SSL cert
 
 #### Current Features Under Development ####
 
 * Implementation of all uncatagorized/experimental endpoints (Network)
 * Further improvements on data parsing from returned JSON
+* Upload to PyPi for pip installation
 
 #### Upcoming Features ####
 * Protect & Access API modules
 * docker image 
-* .EXE, .deb, .dmg executables for cli tool
+* .EXE, .deb, .dmg executables
+
+##### Internal Bitbucket Repo - Pull from the experiment Branch #####
+
+* git branch -a
+* git checkout experiment
+* git pull origin experiment
 
 
 

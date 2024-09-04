@@ -73,9 +73,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
                 self.auth_check = False
                 response.close()
+                return data
             
         except Exception as e:
             print("Error occurred during POST request to logout endpoint:", str(e))
@@ -165,8 +166,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                nested_data = data['data']
+                #pprint.pprint(data)
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred retrieval of site DPI statistics: \n", str(e))
@@ -215,8 +218,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                nested_data=data['data']
+                #pprint.pprint(data)
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred during the POST request to the client dpi endpoint:", str(e))
@@ -247,8 +252,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                nested_data=data['data']
+                #pprint.pprint(data)
                 response.close()
+                return nested_data
             
         except Exception as e:
             print("Error occurred during the GET request to the site event data endpoint:", str(e))
@@ -280,8 +287,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                nested_data=data['data']
+                #pprint.pprint(data)
                 response.close()
+                return nested_data
             
         except Exception as e:
             print("Error occurred during the GET request to the site alarm data endpoint:", str(e))
@@ -430,8 +439,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                nested_data=data['data']
+                #pprint.pprint(data)
                 response.close()
+                return nested_data
             
         except Exception as e:
             print("Error occurred during the POST request to the UDM shutdown endpoint:", str(e))
@@ -458,8 +469,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                nested_data=data['data']
+                #pprint.pprint(data)
                 response.close()
+                return nested_data
             
 
         except Exception as e:
@@ -518,8 +531,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                nested_data=data['data']
+                #pprint.pprint(data)
                 response.close()
+                return nested_data
            
         except Exception as e:
             print("Error occurred during the GET request to the active clients endpoint:", str(e))
@@ -562,8 +577,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                nested_data=data['data']
+                #pprint.pprint(data)
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred during the request to the (all clients) endpoint:", str(e))
@@ -594,8 +611,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                nested_data=data['data']
+                #pprint.pprint(data)
                 response.close()
+                return nested_data
             
         except Exception as e:
             print("Error occurred during the GET request to the site network device information endpoint:", str(e))
@@ -632,8 +651,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                nested_data=data['data']
+                #pprint.pprint(data)
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred during the GET request to the detailed device data endpoint:", str(e))
@@ -682,8 +703,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data=data['data']
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred during the request to the site settings endpoint:", str(e))
@@ -715,8 +738,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data=data['data']
                 response.close()
+                return nested_data
             
         except Exception as e:
             print("Error occurred during GET request to active routes endpoint:", str(e))
@@ -757,8 +782,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data=data['data']
                 response.close()    
+                return nested_data
 
         except Exception as e:
             print("Error occurred during the request to the firewall rules endpoint:", str(e))
@@ -802,8 +829,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data=data['data']
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred during the request to the firewall groups endpoint:", str(e))
@@ -900,8 +929,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data=data['data']
                 response.close()
+                return nested_data
            
 
         except Exception as e:
@@ -942,8 +973,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data=data['data']
                 response.close()
+                return nested_data
                 
         except Exception as e:
             print("Error occurred during the request to the rogue APs endpoint:", str(e))
@@ -974,8 +1007,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data=data['data']
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred during GET request to DynamicDNS information endpoint:", str(e))
@@ -1018,8 +1053,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                nested_data = data['data']
+                #pprint.pprint(data)
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred during the request to the Dynamic DNS configuration endpoint:", str(e))
@@ -1051,8 +1088,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data = data['data']
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred during the GET request to port profile information endpoint:", str(e))
@@ -1111,8 +1150,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data = data['data']
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred during GET request to rf scan results endpoint:", str(e))
@@ -1158,8 +1199,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data=data['data']
                 response.close()
+                return nested_data
                         
         except Exception as e:
             print("Error occurred during request to radius profiles endpoint:", str(e))
@@ -1207,7 +1250,9 @@ class UniFiNetAPI:
             if response.status_code == 200:
                 data = response.json()
                 pprint.pprint(data)
+                nested_data=data['data']
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred during request to radius accounts endpoint:", str(e))
@@ -1239,8 +1284,10 @@ class UniFiNetAPI:
 
            if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data = data['data']
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred during GET request to the port forward config information endpoint:", str(e))
@@ -1277,8 +1324,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data=data['data']
                 response.close()
+                return nested_data
                     
             
         except Exception as e:
@@ -1313,8 +1362,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data=data['data']
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred during POST request to the authorization audit endpoint:", str(e))
@@ -1455,8 +1506,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data=data['data']
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred during the POST request to the client manager endpoint:", str(e))
@@ -1558,8 +1611,10 @@ class UniFiNetAPI:
 
             if response.status_code == 200:
                 data = response.json()
-                pprint.pprint(data)
+                #pprint.pprint(data)
+                nested_data=data['data']
                 response.close()
+                return nested_data
 
         except Exception as e:
             print("Error occurred during the POST request to the device manager endpoint:", str(e))
