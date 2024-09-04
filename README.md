@@ -1,7 +1,7 @@
-# UbiquiPy: UniFi Automation Framework & CLI Management Tool #
+# UbiquiPy: Ubiquiti UniFi Python Library #
 [Click here to learn more](https://www.baughcl.com/ubiquipy.html)
 
-## Python wrapper Library for Ubiquiti UniFi API ##
+## Python wrapper for Ubiquiti UniFi API ##
 
 ## UniFiNetAPI.py can be utilized as a module in your scripts, will be upload to PyPi as a library soon for pip install ##
 
